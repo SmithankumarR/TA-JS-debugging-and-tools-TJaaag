@@ -1,21 +1,35 @@
+function sum(numA ,numB){
+return numA + numB;
+}
+function multiply(numA,numB){
+    return numA * numB;
+}
 // testing framework
-function test(message,callback){
+function test(message, callback){
     try{
         callback();
-        console.log("test passed")
+        console.log(`test passed`,message);
 
-    }catch(error){
-        console.error("test failed");
-        console.log(message)
+    } catch(error){
+        console.error(error);
+        console.log(`test failed not as expected`, message)
     }
 }
-function sum(numA ,numB){
-let sum = numA + numB;
-return sum;
+let result , expected;
+function testAdd() {
+    result = sum(20,40);
+    expected = 60;
+    if(result !== expected){
+        throw new Error(`${result} is not equal to ${expected}`);
+    }
 }
-test("sum of numA and numB", sum(23,42));
-function assertion(actual,expected){
-if(actual === expected){
+test(`adding 2 and 4`, testAdd);
 
+function testMultiply(){
+  result = multiply(3,6);
+  expected = 18;
+  if(result !== expected){
+      throw new Error(`${result} is not equal to ${expected}`);
+  }
 }
-}
+test('multiply 3 and 6' , testMultiply);
